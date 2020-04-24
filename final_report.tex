@@ -1,0 +1,166 @@
+\documentclass[fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+% \usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+% \usepackage{mathptmx}
+% \usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+
+% Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by "N" and "L" etc. in the bibliography.
+% Write the name in the bibliography as "\VAN{Noord}{Van}{van} Noord, Thomas"
+\DeclareRobustCommand{\VAN}[3]{#2}
+\let\VANthebibliography\thebibliography
+\def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Common packages are:
+\usepackage{graphicx}
+\graphicspath{ {C:/dev/spin_down/final_report/report_images/} }	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+% \title[Short title, max. 45 characters]{MNRAS \LaTeXe\ template --}
+\title{PHYS6013 Midterm Report: A Machine Learning Approach to Cool Star Spin-Down}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+\author[E. Doodson et al.]{
+Ely Doodson,$^{1,2,3}$\thanks{E-mail: ely.doodson@cfa.harvard.edu}
+Cecilia Garraffo,$^{2,3}$
+Pavlos Protopapas$^{3}$
+and Jeremy J. Drake$^{2}$
+\\
+% List of institutions
+$^{1}$School of Physics and Astronomy, University of Southampton,
+Southampton, SO17 1BJ, United Kingdom\\
+$^{2}$Harvard-Smithsonian Center for Astrophysics, 60 Garden St, Cambridge, MA 02138, United States \\
+$^{3}$Institute for Applied Computational Science, Harvard University, Cambridge, MA 02138, United States
+}
+
+\pubyear{2020}
+
+%imported for strikethrough
+\usepackage{ulem}
+\usepackage{float}
+
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+\begin{abstract}
+	Observations of young open clusters have shown a bimodal distribution in the rotation
+	periods of cool stars.
+	This bi-modality stems from stars having fast or slow rotation periods.
+	The evolution of this trend through time suggests a fast transition from fast to slow rotating.
+	Our current understanding of cool star spin down, through magnetic braking, accounts for the slow rotators branch, while the fast rotators  remain somewhat of a mystery.
+
+	Our goal is to build a predictive probabilistic spin-down model that links the period of a star at any given mass and age.
+	We use machine learning to predict the age at which each star transitions from fast to slow-rotation.
+	Using a graphical model we will translate the distribution of initial periods into a rotation period probability distribution for a given mass and age.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%500wordsInTotalBeforeBody%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+\begin{itemize}
+
+	\item Establish the context of the work being reported.
+	      \begin{itemize}
+		      \item Lay out the physics of the problem
+		      \item Discuss relevant primary research literature (with citations)
+		      \item Summarize current understanding of the problem
+	      \end{itemize}
+
+	\item State the purpose of the work
+	      \begin{itemize}
+		      \item Hypothesis/
+		      \item Question/
+		      \item Or problem you investigated
+	      \end{itemize}
+
+	\item Explain your rationale and approach and, whenever possible, the possible outcomes your study can reveal.
+
+\end{itemize}
+
+\section{Data Collection}
+\subsubsection{Data Trimming}
+\subsubsection{MIST Tables}
+\subsubsection{Interpolation of Results}
+\subsubsection{Clusters - Displayed}
+\subsubsection{Clusters - Combined}
+
+
+\section{Preliminary Methods}
+\subsection{Unsupervised Clustering}
+\subsection{Polynomial Ridge Regression}
+
+\section{Gaussian Mixture Models}
+Clustering is an unsupervised learning problem where we intend to find clusters of points in our dataset that share some common characteristics.
+
+One important characteristic of K-means is that it is a hard clustering method, which means that it will associate each point to one and only one cluster.
+A limitation to this approach is that there is no uncertainty measure or probability that tells us how much a data point is associated with a specific cluster.
+
+A Gaussian Mixture is a function that is comprised of several Gaussians, each identified by $k \in \{1,\dots, K\}$, where $K$ is the number of clusters of our dataset. Each Gaussian $k$ in the mixture is comprised of the following parameters:
+
+\begin{equation}
+	\label{eq:gaussian_density_function}
+
+
+\end{equation}
+\section{Final Model Analysis}
+\subsubsection{}
+\subsection{The Importance of Initial Period, $P_i$} \label{sec:initial_period}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%REFERENCES%%%%%%%%%%%%%%%%%%
+
+%The best way to enter references is to use BibTeX:
+
+\bibliographystyle{mnras}
+\bibliography{references}
+
+%%%%%%%%%%%%%%%%%APPENDICES%%%%%%%%%%%%%%%%%%%%%
+
+% \appendix
+
+% \section{Some extra material}
+
+% If you want to present additional material which would interrupt the flow of the main paper,
+% it can be placed in an Appendix which appears after the list of references.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
+
+% End of mnras_template.tex
