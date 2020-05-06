@@ -23,7 +23,7 @@
 
 % Only include extra packages if you really need them. Common packages are:
 \usepackage{graphicx}
-\graphicspath{ {C:/dev/spin_down/final_report/report_images/} }	% Including figure files
+\graphicspath{ {report_images/} }	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
 
@@ -72,15 +72,14 @@ $^{3}$Institute for Applied Computational Science, Harvard University, Cambridge
 
 % Abstract of the paper
 \begin{abstract}
-	Observations of young open clusters have shown a bimodal distribution in the rotation
-	periods of cool stars.
+	Observations of young open clusters have shown a bi-modal distribution in the rotation periods of cool stars.
 	This bi-modality stems from stars having fast or slow rotation periods.
-	The evolution of this trend through time suggests a fast transition from fast to slow rotating.
-	Our current understanding of cool star spin down, through magnetic braking, accounts for the slow rotators branch, while the fast rotators  remain somewhat of a mystery.
+	The evolution of this trend through time suggests a rapid transition from fast to slow rotating.
+	Our current understanding of cool star spin down, through magnetic braking, accounts for the slow rotators branch, while the fast rotators remain somewhat of a mystery.
 
 	Our goal is to build a predictive probabilistic spin-down model that links the period of a star at any given mass and age.
-	We use machine learning to predict the age at which each star transitions from fast to slow-rotation.
-	Using a graphical model we will translate the distribution of initial periods into a rotation period probability distribution for a given mass and age.
+% 	We use machine learning to predict the age at which each star transitions from fast to slow-rotation.
+% 	Using a graphical model we will translate the distribution of initial periods into a rotation period probability distribution for a given mass and age.
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,54 +87,210 @@ $^{3}$Institute for Applied Computational Science, Harvard University, Cambridge
 %%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
-\begin{itemize}
+% \begin{itemize}
 
-	\item Establish the context of the work being reported.
-	      \begin{itemize}
-		      \item Lay out the physics of the problem
-		      \item Discuss relevant primary research literature (with citations)
-		      \item Summarize current understanding of the problem
-	      \end{itemize}
+% 	\item Establish the context of the work being reported.
+% 	      \begin{itemize}
+% 		      \item Lay out the physics of the problem
+% 		      \item Discuss relevant primary research literature (with citations)
+% 		      \item Summarize current understanding of the problem
+% 	      \end{itemize}
 
-	\item State the purpose of the work
-	      \begin{itemize}
-		      \item Hypothesis/
-		      \item Question/
-		      \item Or problem you investigated
-	      \end{itemize}
+% 	\item State the purpose of the work
+% 	      \begin{itemize}
+% 		      \item Hypothesis/
+% 		      \item Question/
+% 		      \item Or problem you investigated
+% 	      \end{itemize}
 
-	\item Explain your rationale and approach and, whenever possible, the possible outcomes your study can reveal.
+% 	\item Explain your rationale and approach and, whenever possible, the possible outcomes your study can reveal.
 
-\end{itemize}
+% \end{itemize}
+\subsubsection{stellar rotation }
+Stars are formed from collapsing clouds of gas and dust. 
+% TODO: cite.
+The regions of this cloud that form a protostar are not static.
+The gas and dust molecules within the cloud have their own peculiar velocities.
+In the rest frame, the cloud rotates in one direction, which is the average of all those peculiar velocities.
+As the cloud collapses, its radius decreases and it begins to heat up, forming a protostar. 
+% TODO: cite grav energy heating.
+To conserve angular momentum (AM), when the protostar’s radius decreases, its velocity in that overall direction has to increase.
+For a constant cloud mass, this resultant velocity has a wide range of values and therefore is highly sensitive to the initial condition of the cloud. 
+% TODO: Show early OC
+This velocity is not constant and decreases as the star ages.
 
-\section{Data Collection}
+
+\subsubsection{magnetic breaking}
+The K and M stellar spectral type are low mass, cool stars which make up the vast majority of stars in the universe. 
+% TODO: cite this
+A cool star is defined by the presence of a convective envelope.
+The convective envelope is a region which has convective cells that move material between the core and the outermost regions of the star. 
+% TODO: figure explaining
+The convective envelope acts as a dynamo within the star, generating a magnetic field which stretches to orders of stellar radii. 
+% TODO: cite this 
+The strength of this magnetic field is proportional to the star's rotational velocity.
+
+Material ejected from the stellar surface travels along these magnetic field lines.
+This material forms “arms” at the stellar equator which effectively co-rotate with the surface.
+When the magnetic field lines eventually close, these arms end and the material is released from the star’s influence.
+Due to this material being released at a large radius, it carries away much more AM/mass than it would if released from the stellar surface.
+This reduction in AM causes the star to slow down. 
+% TODO: math eqn to prove this?
+A lower rotational velocity results in a weaker magnetic field.
+This weakening shortens the stellar arms, lowering the rate of AM loss.
+This process is called \textit{magnetic braking} and is a self-regulating mechanism which reduces the rotational velocity of cool stars. 
+% TODO: cite this
+
+\subsubsection{importance of stellar rotation}
+The magnetic dynamo generated by stellar rotation is responsible for many observed stellar characteristics such as star spots, UV/X-ray chromospherics and coronal emission. 
+% TODO: cite.
+So far our understanding of these properties is purely from the Sun. 
+Stellar activity creates an energetic photon and particle radiation environment that has a significant impact on the formation of planets and their subsequent atmospheric evolution. 
+% TODO: cite.
+This is especially important for planets orbiting close to their host star, such as in the “habitable zone”.
+Understanding this evolution will be crucial to the development of the rising field of exoplanets and exoplanet habitability
+
+
+\subsubsection{established research}
+The self-regulatory nature of magnetic braking leads to the conclusion that for a constant mass and age, stars should spin down at relatively the same rate.
+To prove this, the periods of stars of a constant age and mass would have to be compared.
+The age of an individual star is difficult and time consuming to measure.
+% TODO:prove this?
+However, the period and aliases for mass can be obtained more easily.
+% TODO:prove this also
+An Open cluster (OC) is a group of stars which were formed from the same molecular cloud, making them all approximately the same age.
+The age of these coeval groups can be measured TODO: cite how, providing a snapshot in time of large groups of stars.
+This makes OCs perfect for research into stellar rotation.
+
+One of the first works into stellar rotation of OCs was TODO: Skumanich et al 1972.
+He provided the first spin-down law,  $\text{Period} \propto \text{Age}^{-0.51}$, which birthed the field of gyrochronology.
+Gyrochronology is the study of the relationship between a star's period and its age.
+This law, however, is based on 4 data points which limits its scientific validity.
+When observing period as a function of mass in OCs $< 1\text{Gyr}$,  it can be seen that for a constant mass there are 2 populations of stars and a transition between them. 
+% TODO: figure.
+The Skumanich law roughly predicts the upper populations evolution through time, however, neglects the lower population of stars and the transition between the two.
+
+Numerous theories and models have since tried to explain and replicate this degeneracy.
+However, these models only refined the Skumanich law for the upper population of stars and did not address the degeneracy.
+The leading theory is one that states that the convective envelope and core of the star decouple.
+Leading to a redistribution of mass within the star, altering the AM distribution and therefore the star’s velocity.
+This theory, however, has severe limitations because this degeneracy is seen in fully convective stars with no core. 
+% TODO:figure showing this.
+
+The self-regulating nature of magnetic braking alone does not account for this degeneracy.
+An increase in Zeeman–Doppler-Imaging observations of young stars indicated the storing of large amounts of energy in higher order magnetic fields.
+% TODO: cite works.
+Shown in TODO: Garraffo et al 2017, a star’s magnetic flux has a large role in its rotational evolution.
+TODO: Garraffo et al 2017 uses a synthetic population of stars that are evolved using a physics driven simulation.
+This simulation takes into account the evolution of a star’s magnetic complexity, from high to low complexity.
+The population was then aged to that of an observed OC.
+The resulting synthetic population reproduces this degeneracy moreso than simulations that did not account for it.
+% TODO cite bad works, TODO: figure from cecilia
+
+\subsubsection{this work, and how it addresses these problems}
+END OF PROGRESS
+
+The aim is to get predictive capabilities of finding the period, given age and mass.
+
+This probability distribution could subsequently be used to predict the age of an open clusters by comparing the real data to the probabilities associated with it and find the likelihood of the cluster being of that age.
+
+This could be used vice-versa, given a period and mass, what is the age. Basis of gyro chronology.
+
+This project will give a probabilistic approach rather than a deterministic as there are factors missing which allow for the predictive capabilities of some mass regions. Therefore we settled for probabilistic model which will give a probability of a star having that mass, period and age.
+
+
+\section{Data Collection and Conversion}
+\subsubsection{open clusters used}
+Collections of OC data on period and mass aliases have been grouped by previous works on gyrochronology.
+% TODO: cite collection.
+Data from OCs, ranging from 13 to >1000Myrs, are used in this work.
+Clusters XYZ, present in CITE, have since had new observations from CITE.
+% TODO: cite XYZ. TODO: fill XYZ
+Tess and K2 have provided new data on OCs that builds upon that collection.
+These new OCs include IJK, CITE. 
+% TODO: cite IJK. TODO: fill IJK
+
 \subsubsection{Data Trimming}
+Data collected from catalog and other sources.
+
+challenges of all being in different photometries
+
 \subsubsection{MIST Tables}
-\subsubsection{Interpolation of Results}
+MIST, and how it works
+
+MIST, and how it was used to interpolate mass from photometry
+
+\subsubsection{Results}
+Performance and problems with the conversion, m37's range perhaps
+
+discussion of age ranges and other limitations
+
 \subsubsection{Clusters - Displayed}
+discussion of degeneracy in some of the OC
+
 \subsubsection{Clusters - Combined}
+Merger of similarly ages clusters
+
+
+
 
 
 \section{Preliminary Methods}
 \subsection{Unsupervised Clustering}
+motive for this methodology
+
+what did it entail
+
+problems we ran into
+
+why was it abandoned/what were the limitations
 \subsection{Polynomial Ridge Regression}
+motive for this methodology
+
+what did it entail
+
+problems we ran into
+
+why was it abandoned/what were the limitations
+\subsection{Bayesian Networks?}
+motive for this methodology
+
+what did it entail
+
+problems we ran into
+
+why was it abandoned/what were the limitations
 
 \section{Gaussian Mixture Models}
-Clustering is an unsupervised learning problem where we intend to find clusters of points in our dataset that share some common characteristics.
+Clustering is an unsupervised learning problem where we intend to find clusters of points in our data set that share some common characteristics.
 
 One important characteristic of K-means is that it is a hard clustering method, which means that it will associate each point to one and only one cluster.
 A limitation to this approach is that there is no uncertainty measure or probability that tells us how much a data point is associated with a specific cluster.
 
-A Gaussian Mixture is a function that is comprised of several Gaussians, each identified by $k \in \{1,\dots, K\}$, where $K$ is the number of clusters of our dataset. Each Gaussian $k$ in the mixture is comprised of the following parameters:
+A Gaussian Mixture is a function that is comprised of several Gaussian's, each identified by $k \in \{1,\dots, K\}$, where $K$ is the number of clusters of our data set. Each Gaussian $k$ in the mixture is comprised of the following parameters:
+
+\begin{itemize}
+    \item A mean $\mu$ that defines its centre.
+    \item A co-variance $\Sigma$ that defines its width. This would be equivalent to the dimensions of an ellipsoid in a multivariate scenario.
+    \item A mixing probability $\pi$ that defines how big or small the Gaussian function will be.
+\end{itemize}
 
 \begin{equation}
-	\label{eq:gaussian_density_function}
-
-
+    \label{eq:gaussian_density_function}
+    \mathcal{N}(x|\mu,\Sigma) = \frac{1}{(2\pi)^{D/2}|\Sigma|^{1/2}} \exp \left(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right)
 \end{equation}
+where $x$ is the data, $D$ is the dimensionality of $x$, $\mu$ and $\Sigma$ are the mean and co-variance, respectively.
+PLAGERISED $\longrightarrow$ "If we have a dataset comprised of $N = 1000$ three-dimensional points $(D = 3)$, then $x$ will be a $1000 \times 3$ matrix. $\mu$ will be a $1 \times 3$ vector, and $\Sigma$ will be a $3 \times 3$ matrix. For later purposes, we will also find it useful to take the log of this equation, which is given by:"
+
+\begin{equation}
+    \label{eq:log_gaussian_density_function}
+    \ln\mathcal{N}(x|\mu,\Sigma) = -\frac{D}{2}\ln2\pi - \frac{1}{2}\ln\Sigma - \frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)
+\end{equation}
+PLAGERISED $\longrightarrow$ "If we differentiate this equation with respect to the mean and covariance and then equate it to zero, then we will be able to find the optimal values for these parameters, and the solutions will correspond to the Maximum Likelihood Estimates (MLE) for this setting. However, because we are dealing with not just one, but many Gaussian's, things will get a bit complicated when time comes for us to find the parameters for the whole mixture. In this regard, we will need to introduce some additional aspects that we discuss in the next section."
+
 \section{Final Model Analysis}
 \subsubsection{}
-\subsection{The Importance of Initial Period, $P_i$} \label{sec:initial_period}
+\subsection{The Importance of Initial Period, $P_i$}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
