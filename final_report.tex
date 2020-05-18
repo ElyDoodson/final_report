@@ -77,7 +77,7 @@ $^{3}$Institute for Applied Computational Science, Harvard University, Cambridge
 	The evolution of this trend through time suggests a rapid transition from fast to slow rotating.
 	Our current understanding of cool star spin down, through magnetic braking, accounts for the slow rotators branch, while the fast rotators remain somewhat of a mystery.
 
-	Our goal is to build a predictive probabilistic spin-down model that links the period of a star at any given mass and age.
+	Our goal is to build a predictive probabilistic spin-down model that links the period of a star at any given mass and age. \textcolor{blue}{CG: I would say "links the rotation period of a cool star to its mass and age" or "that predicts the rotation period of a cool star at any given mass and age". }
 % 	We use machine learning to predict the age at which each star transitions from fast to slow-rotation.
 % 	Using a graphical model we will translate the distribution of initial periods into a rotation period probability distribution for a given mass and age.
 \end{abstract}
@@ -109,46 +109,46 @@ $^{3}$Institute for Applied Computational Science, Harvard University, Cambridge
 \subsubsection{stellar rotation }
 Stars are formed from collapsing clouds of gas and dust. 
 % TODO: cite.
-The regions of this cloud that form a protostar are not static.
+The regions of this cloud that form a protostar are not static \textcolor{blue}{CG: I would remove this sentence}.
 The gas and dust molecules within the cloud have their own peculiar velocities.
 In the rest frame, the cloud rotates in one direction, which is the average of all those peculiar velocities.
 As the cloud collapses, its radius decreases and it begins to heat up, forming a protostar. 
 % TODO: cite grav energy heating.
 To conserve angular momentum (AM), when the protostar’s radius decreases, its velocity in that overall direction has to increase.
-For a constant cloud mass, this resultant velocity has a wide range of values and therefore is highly sensitive to the initial condition of the cloud. 
+For a constant cloud mass, this resultant velocity has a wide range of values and therefore is highly sensitive to the initial condition of the cloud \textcolor{blue}{CG: I would just say "This resultant angular velocity is highly sensitive to the initial conditions, i. e. the dynamics of the cloud collapse}.
 % TODO: Show early OC
-This velocity is not constant and decreases as the star ages.
+This velocity is not constant and decreases as the star ages \textcolor{blue}{CG: I would move this sentence to the next paragraph}.
 
 
 \subsubsection{magnetic breaking}
-The K and M stellar spectral type are low mass, cool stars which make up the vast majority of stars in the universe. 
+The K and M stellar spectral type are low mass, cool stars which make up the vast majority of stars in the universe \textcolor{blue}{CG: Would remove this one too. We don't study only K and M stars. Or you could say that cool stars make up the vast majority of stars in the galaxy (not sure about the Universe)}. 
 % TODO: cite this
 A cool star is defined by the presence of a convective envelope.
 The convective envelope is a region which has convective cells that move material between the core and the outermost regions of the star. 
 % TODO: figure explaining
 The convective envelope acts as a dynamo within the star, generating a magnetic field which stretches to orders of stellar radii. 
 % TODO: cite this 
-The strength of this magnetic field is proportional to the star's rotational velocity.
+The strength of this magnetic field is proportional to the star's rotational velocity  \textcolor{blue}{CG: It is stronger for faster rotators, but not exactly proportional. It also depends on the size of the convective envelope (so on the mass of the star) and there is a point in which it saturates.}.
 
 Material ejected from the stellar surface travels along these magnetic field lines.
-This material forms “arms” at the stellar equator which effectively co-rotate with the surface.
-When the magnetic field lines eventually close, these arms end and the material is released from the star’s influence.
+This material forms “arms” at the stellar equator which effectively co-rotate with the surface  \textcolor{blue}{CG: not only at the equator}.
+When the magnetic field lines eventually close, these arms end and the material is released from the star’s influence \textcolor{blue}{CG: The material is lost through the open field lines (they get open from the pressure of the wind), not the closed ones.}.
 Due to this material being released at a large radius, it carries away much more AM/mass than it would if released from the stellar surface.
 This reduction in AM causes the star to slow down. 
 % TODO: math eqn to prove this?
 A lower rotational velocity results in a weaker magnetic field.
-This weakening shortens the stellar arms, lowering the rate of AM loss.
+This weakening shortens the stellar arms \textcolor{blue}{CG: this is true but not the only contributing effect. the speed of the wind also depends on B.}, lowering the rate of AM loss.
 This process is called \textit{magnetic braking} and is a self-regulating mechanism which reduces the rotational velocity of cool stars. 
 % TODO: cite this
 
 \subsubsection{importance of stellar rotation}
-The magnetic dynamo generated by stellar rotation is responsible for many observed stellar characteristics such as star spots, UV/X-ray chromospherics and coronal emission. 
+The magnetic dynamo generated by stellar rotation is responsible for many observed stellar characteristics \textcolor{blue}{CG: phenomena?} such as star spots, UV/X-ray chromospherics and coronal emission. 
 % TODO: cite.
-So far our understanding of these properties is purely from the Sun. 
+So far our understanding of these properties is purely from the Sun \textcolor{blue}{CG: I am not sure this is true. The activity-rotation relationship from stars.}. 
 Stellar activity creates an energetic photon and particle radiation environment that has a significant impact on the formation of planets and their subsequent atmospheric evolution. 
 % TODO: cite.
 This is especially important for planets orbiting close to their host star, such as in the “habitable zone”.
-Understanding this evolution will be crucial to the development of the rising field of exoplanets and exoplanet habitability
+Understanding this evolution will be crucial to the development of the rising field of exoplanets and exoplanet habitability. \textcolor{blue}{CG: I think we need to expand this section a bit. Mention gyrochronology, dynamo... }
 
 
 \subsubsection{established research}
@@ -156,32 +156,35 @@ The self-regulatory nature of magnetic braking leads to the conclusion that for 
 To prove this, the periods of stars of a constant age and mass would have to be compared.
 The age of an individual star is difficult and time consuming to measure.
 % TODO:prove this?
-However, the period and aliases for mass can be obtained more easily.
+However, the period and aliases for mass can be obtained more easily \textcolor{blue}{CG: do you mean the ages can be obtained more easily? That is what gets easier with OCs}.
 % TODO:prove this also
 An Open cluster (OC) is a group of stars which were formed from the same molecular cloud, making them all approximately the same age.
 The age of these coeval groups can be measured TODO: cite how, providing a snapshot in time of large groups of stars.
 This makes OCs perfect for research into stellar rotation.
 
-One of the first works into stellar rotation of OCs was TODO: Skumanich et al 1972.
+One of the first works into stellar rotation of OCs was CITE. \textcolor{blue}{CG: cite Meibom et al 2015}
+% TODO: Skumanich et al 1972.
 He provided the first spin-down law,  $\text{Period} \propto \text{Age}^{-0.51}$, which birthed the field of gyrochronology.
 Gyrochronology is the study of the relationship between a star's period and its age.
-This law, however, is based on 4 data points which limits its scientific validity.
-When observing period as a function of mass in OCs $< 1\text{Gyr}$,  it can be seen that for a constant mass there are 2 populations of stars and a transition between them. 
+This law, however, is based on 4 data points which limits its scientific validity. \textcolor{blue}{CG: it was originally based on 4 data points, but has been successful since then. It still is an approximation.}
+When observing period as a function of mass in OCs < 1Gyr,  it can be seen that for a constant mass there are 2 populations of stars and a transition between them. 
 % TODO: figure.
-The Skumanich law roughly predicts the upper populations evolution through time, however, neglects the lower population of stars and the transition between the two.
+The Skumanich law roughly predicts the upper populations evolution through time, however, neglects the lower population of stars and the transition between the two \textcolor{blue}{CG: upper and lower population are a bit confussing since they have not been defined}.
 
-Numerous theories and models have since tried to explain and replicate this degeneracy.
-However, these models only refined the Skumanich law for the upper population of stars and did not address the degeneracy.
-The leading theory is one that states that the convective envelope and core of the star decouple.
+Numerous theories and models have since tried to explain and replicate this degeneracy \textcolor{blue}{CG: of rotation periods as a function of mass and age}.
+However, these models only refined the Skumanich law for the upper population of stars and did not address the degeneracy. \textcolor{blue}{CG: There is plenty of work to try and explain the bimodality. Check S. Barnes's papers and Tim Brown's}
+The leading theory is one that states that the convective envelope and core of the star decouple \textcolor{blue}{CG: this is actually Barnes' work that tries to explain the two branches}.
 Leading to a redistribution of mass within the star, altering the AM distribution and therefore the star’s velocity.
-This theory, however, has severe limitations because this degeneracy is seen in fully convective stars with no core. 
+This theory, however, has severe limitations because this degeneracy is seen in fully convective stars with no core \textcolor{blue}{CG: I would say that the theory has been recently challenged because the bimodal distribution of periods has been observed in fully convective stars.}. 
 % TODO:figure showing this.
 
-The self-regulating nature of magnetic braking alone does not account for this degeneracy.
-An increase in Zeeman–Doppler-Imaging observations of young stars indicated the storing of large amounts of energy in higher order magnetic fields.
+The self-regulating nature of magnetic braking alone does not account for this degeneracy \textcolor{blue}{CG: Not too sure I understand this sentence}.
+An increase in Zeeman–Doppler-Imaging observations of young stars indicated the storing of large amounts of energy in higher order magnetic fields \textcolor{blue}{CG: I guess you mean that an increasing number of ZDI suggest that younger, faster rotating stars store a larger amount of energy in higher order moments of the magnetic field}.
 % TODO: cite works.
-Shown in TODO: Garraffo et al 2017, a star’s magnetic flux has a large role in its rotational evolution.
-TODO: Garraffo et al 2017 uses a synthetic population of stars that are evolved using a physics driven simulation.
+Shown in CITE \textcolor{blue}{CG: you can cite Reville et al. 2015, Garraffo et al. 2015, 2016a}, a star’s magnetic flux has a large role in its rotational evolution \textcolor{blue}{CG: Maybe what would fit here is to point out the role of the geometry of the magnetic field, more than the flux. The flux was discussed earlier} .
+% TODO: cite cecilia 
+CITE uses a synthetic population of stars that are evolved using a physics driven simulation.
+% todo: cite cecilia
 This simulation takes into account the evolution of a star’s magnetic complexity, from high to low complexity.
 The population was then aged to that of an observed OC.
 The resulting synthetic population reproduces this degeneracy moreso than simulations that did not account for it.
@@ -189,6 +192,8 @@ The resulting synthetic population reproduces this degeneracy moreso than simula
 
 \subsubsection{this work, and how it addresses these problems}
 END OF PROGRESS
+
+NEED TO DISCUSS WHAT THE MODEL WILL BE AND WHAT IT WILL DO
 
 The aim is to get predictive capabilities of finding the period, given age and mass.
 
@@ -210,20 +215,53 @@ Tess and K2 have provided new data on OCs that builds upon that collection.
 These new OCs include IJK, CITE. 
 % TODO: cite IJK. TODO: fill IJK
 
-\subsubsection{Data Trimming}
-Data collected from catalog and other sources.
+\subsubsection{age constraints}
+OPTIONAL PARAGRAPH, BADLY WORDED, MIGHT BE NONSENSE
 
-challenges of all being in different photometries
+Stars up to $\sim$13Myrs have a protostellar disc CITE which interferes with the star’s rotational evolution.
+% TODO: cite.
+Much is unknown about how these systems evolve so modelling stars influenced by this disc is beyond the scope of this project.
+% Clusters of age >1Gyr are included to make sure it aligns with the known evolution of those stars.
+OCs older than 1Gyr have been added to ensure our model aligns with modern day gyrochronological models. 
+
+
+\subsubsection{mass aliases and photometry}
+
+As mentioned previously, the period of a star can be calculated from direct observations.
+The period of a star within an OC can be measured from the time series analysis of their phased(folded? Stacked?) light curves.
+% TODO: cite?
+However, mass can be converted from photometric observations which have a degeneracy associated with them.
+Stars of different mass evolve at varying rates.
+A higher mass results in a faster evolution.
+This means stars of different masses can have the same photometric values, but will be different ages.
+% TODO: plot showing this?
+
+OC catalogues can contain multiple photometric bands.
+The observed bands can vary between catalogues.
+The band and flux of these photometries are both a function of mass.
+This makes it difficult to convert all the catalogues into mass since each requires a different function.
+In addition, in some bands, photometric flux as a function of mass is not well documented, especially for lower masses.
+This was solved using interpolation of stellar evolutionary tracks generated by M.I.S.T.
+% TODO:cite mist
 
 \subsubsection{MIST Tables}
-MIST, and how it works
+The MESA (Modules for Experiments in Stellar Astrophysics) Isochrones and Stellar Track (MIST) tables simulate stars, ranging in mass, and evolve them through time to generate information.
+% TODO:cite
+Information, pertaining to stellar properties such as photometric flux and their respective band, is calculated at each time step.
+The time step is dynamic, being large when the stars properties seldom change and small when rapid change occurs.
+This ensures adequate information about rapid evolutionary stages and reduces the computational intensity of the simulation.
+Meaning stars of different mass will have varying time steps and therefore different age data.
 
-MIST, and how it was used to interpolate mass from photometry
+Hypothetically, taking the closest N MIST photometry values to a data point would result in N values with a range of ages and sometimes masses.
+Therefore, to find the most accurate values for photometry, the age of each OC was obtained from the literature.
+% TODO: cite the ages???
+Using this age, values 10\% above and below this age were isolated from the MIST tables.
+From this subset, the closest photometric MIST value above and below our OCs data point were isolated.
+Finally, these two values of mass and photometry were interpolated between to get a more accurate estimate for the true mass.
+This was done for all points in each OC.
 
 \subsubsection{Results}
 Performance and problems with the conversion, m37's range perhaps
-
-discussion of age ranges and other limitations
 
 \subsubsection{Clusters - Displayed}
 discussion of degeneracy in some of the OC
